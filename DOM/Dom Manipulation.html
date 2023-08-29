@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capturing and Displaying Form Data using DOM Manipulation</title>
+</head>
+<body>
+    <input type="text" id="myInput"/>
+    <button onclick="showValue()" id="myButton">Submit</button>
+    <p>Entered Value</p>
+</body>
+<script>
+    let enterValue = document.getElementById("myInput");
+    function showValue() {
+        document.getElementsByTagName("p")[0].innerText = "Entered Value: "+ enterValue.value;
+    }
+</script>
+
+</html>
