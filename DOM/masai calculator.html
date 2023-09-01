@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masai Calculator</title>
+    <style>
+        *{ 
+            text-align: center;
+        }
+        h1{
+            color:teal;
+            font-size: 3rem;
+            margin:50px
+
+        }
+        #buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap:5px 5px;
+        }
+        #buttons > div{
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+        }
+        h1 + div{
+            width: 300px;
+            height: 390px;
+            margin: auto;
+            padding: 50px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            font-weight: 900;
+            font-size:larger;
+        }
+        input{
+            height:60px;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border:none;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            font-size: 2.5rem;
+        }
+        #buttons :nth-child(4), #buttons :nth-child(8), #buttons :nth-child(12), #buttons :nth-child(15), #buttons :nth-child(16){
+            background-color: black;
+            color: white;
+        }
+        #buttons :nth-child(13){
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Masai Calculator</h1>
+    <div>
+        <input/>
+        <div id="buttons">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>+</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>-</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>x</div>
+            <div>C</div>
+            <div>0</div>
+            <div>=</div>
+            <div>/</div>
+        </div>
+    </div>
+</body>
+<script>
+    let firstNumber = "";
+    let secondNumber = "";
+    let operator = "";
+    let result = ""
+    let inputField = document.querySelector("input");
+    let numbers = document.querySelectorAll("#buttons > div");
+    function calculation(firstNumber, secondNumber, operator) {
+        switch (operator){
+                    case "+":
+                        return Number(firstNumber) + Number(secondNumber);
+                    case "-":
+                        return Number(firstNumber) - Number(secondNumber);
+                    case "x":
+                        return  Number(firstNumber) * Number(secondNumber);
+                    case "/":
+                        return Number(firstNumber) / Number(secondNumber)
+                }
+    }
+    for(let i = 0; i < numbers.length; i++) {
+        if(i === 12){
+            numbers[i].addEventListener("click", function(){
+                firstNumber = "";
+            secondNumber = "";
+            operator = "";
+            inputField.value = "";
+            })
+        }else if(i === 14){
+            numbers[i].addEventListener("click", function(){
+               inputField.value = calculation(firstNumber, secondNumber,operator[operator.length-1]);
+               firstNumber = calculation(firstNumber, secondNumber,operator[operator.length-1]);
+               secondNumber="";
+               console.log(operator);
+            })
+        }
+        else if(i === 3 || i === 7 || i === 11 || i === 15){
+            numbers[i].addEventListener("click", function(){
+                    operator +=numbers[i].innerText;
+                    inputField.value = "";
+                    if(secondNumber !== ""){
+                        firstNumber = calculation(firstNumber, secondNumber,operator[operator.length-2]);
+                        secondNumber="";
+                    }
+            })
+        }else{
+            
+                numbers[i].addEventListener("click", function(){
+                    if(operator === ""){
+                        firstNumber += numbers[i].innerHTML
+                        inputField.value = firstNumber
+                    }else{
+                        secondNumber += numbers[i].innerHTML
+                        inputField.value = secondNumber
+                    }
+                    
+                });
+            
+            
+             
+            
+        }
+        console.log(numbers[i].innerHTML)
+    }
+</script>
+</html>
