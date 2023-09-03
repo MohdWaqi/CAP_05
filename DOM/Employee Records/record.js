@@ -80,5 +80,4 @@ formData.addEventListener("submit", function (event) {
   employeeExperience.value = "";
   employeeEmail.value = "";
   employeeMobile.value = "";
-  tableBody.value = "";
 });

@@ -77,6 +77,12 @@ formData.addEventListener("submit", function (event) {
     const btn = e.target;
     btn.closest("tr").remove();
   });
+  doctorName
+doctorId
+doctorDept
+doctorExperience
+doctorEmail
+doctorMobile
 });
 
 
