@@ -11,7 +11,7 @@ const tableBody = document.querySelector("tbody");
 
 formData.addEventListener("submit", function (event) {
   event.preventDefault();
-  let allDoctors = []
+  let allDoctors = [];
   allDoctors.push({
     name: doctorName.value,
     id: doctorId.value,
@@ -20,7 +20,7 @@ formData.addEventListener("submit", function (event) {
     mail: doctorEmail.value,
     contact: doctorMobile.value,
   });
-  allDoctors.forEach(function (element){
+  allDoctors.forEach(function (element) {
     let tableRow = document.createElement("tr");
     let tdName = document.createElement("td");
     let tdId = document.createElement("td");
@@ -30,7 +30,6 @@ formData.addEventListener("submit", function (event) {
     let tdContact = document.createElement("td");
     let tdRole = document.createElement("td");
     let tdDelete = document.createElement("td");
-    
 
     if (element.experience <= 1) {
       tdRole.innerText = "Trainee";
@@ -61,28 +60,26 @@ formData.addEventListener("submit", function (event) {
     tableBody.append(tableRow);
     let deleteButton = document.querySelectorAll("td > button");
 
-  for (let element of deleteButton) {
-    element.style.backgroundColor = "red";
-  }
+    for (let element of deleteButton) {
+      element.style.backgroundColor = "red";
+    }
   });
-    
+
   let tableEL = document.querySelector("table");
 
-  tableEL.addEventListener("click",function(e){
-    if(!e.target.classList.contains("deleteBtn")){
-      console.log(e.target.classList)
+  tableEL.addEventListener("click", function (e) {
+    if (!e.target.classList.contains("deleteBtn")) {
+      console.log(e.target.classList);
       return;
     }
-    console.log(e.target.classList)
+    console.log(e.target.classList);
     const btn = e.target;
     btn.closest("tr").remove();
   });
-  doctorName
-doctorId
-doctorDept
-doctorExperience
-doctorEmail
-doctorMobile
+  doctorName.value = "";
+  doctorId.value = "";
+  doctorDept.value = "";
+  doctorExperience.value = "";
+  doctorEmail.value = "";
+  doctorMobile.value = "";
 });
-
-
