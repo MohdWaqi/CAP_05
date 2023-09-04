@@ -113,7 +113,7 @@
             buttons[i].addEventListener("click",function(){
                 displayNumber = document.querySelector("input").value;
                 document.querySelector("input").value = "";
-                if(Number(minimumScore.innerText) > Number(displayNumber) && Number(displayNumber)!= 0)) {
+                if(Number(minimumScore.innerText) > Number(displayNumber) && Number(displayNumber)!= 0) {
                     minimumScore.innerText = Number(displayNumber);
                 }else if(Number(maximumScore.innerText) < Number(displayNumber)){
                     maximumScore.innerText = Number(displayNumber);
