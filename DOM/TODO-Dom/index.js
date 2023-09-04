@@ -32,4 +32,6 @@ form.addEventListener("submit", function (e) {
       }
     }
   }
+  task.value = "";
+  priority.value = "";
 });
