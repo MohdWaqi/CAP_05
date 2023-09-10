@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulation Game</title>
+  </head>
+  <body></body>
+  <script>
+    let Vehicle = function (
+      brandName,
+      vehicleModel,
+      vehicleSpeed,
+      vehicleFuelType
+    ) {
+      this.brand = brandName;
+      this.model = vehicleModel;
+      this.speed = vehicleSpeed;
+      this.fuelType = vehicleFuelType;
+      this.accelerate = () => {
+        return "Yeah speed is increasing";
+      };
+      this.brake = function () {
+        return "♫♬ Dheeme Dheeme ♫♬";
+      };
+      this.refuel = function () {
+        return "I am Hungry, 'Please fill the tank'";
+      };
+    };
+    function Car(carBrand, carModel, carSpeed, carFuelType) {
+      Vehicle.call(this, carBrand, carModel, carSpeed, carFuelType);
+      this.numberOfWheels = 4;
+      this.honk = function () {
+        return "♫♬ Bach ke Zara ♫♬";
+      };
+    }
+    function Airplane(
+      airplaneBrand,
+      airplaneModel,
+      airplaneSpeed,
+      airplaneFuelType,
+      airplaneEngine
+    ) {
+      Vehicle.apply(this, [
+        airplaneBrand,
+        airplaneModel,
+        airplaneSpeed,
+        airplaneFuelType,
+      ]);
+      this.numberOfEngines = airplaneEngine;
+      this.hasLandingGear = true;
+      this.takeOff = function () {
+        return "This Plane is now Landing.";
+      };
+    }
+
+    let car1 = new Car("Bugatti", "Chiron", "489 Km/h", "Petrol");
+    let car2 = new Car(
+      "Lamborghini",
+      "Lamborghini Huracan",
+      "325 Km/h",
+      "Petrol"
+    );
+    let car3 = new Car(
+      "Mercedes-Benz",
+      "Mercedes-Benz S-Class",
+      "250 Km/h",
+      "Diesel"
+    );
+
+    let airplane1 = new Airplane(
+      "Boeing",
+      "Boeing 787 Dreamliner",
+      "954 km/h",
+      "Kerosene",
+      2
+    );
+    let airplane2 = new Airplane(
+      "Boeing",
+      "Boeing 747",
+      "988 km/h",
+      "Kerosene",
+      4
+    );
+    let airplane3 = new Airplane(
+      "Lockheed Martin",
+      "F-16 Fighting Falcon",
+      "2414 km/h",
+      "biofuel",
+      1
+    );
+    console.log(car1.speed);
+    console.log(car2.honk());
+    console.log(car3.model);
+    console.log(car2.fuelType);
+    console.log(car1.brand);
+    console.log(car1.numberOfWheels);
+    console.log(car2.brake());
+    console.log(car3.accelerate());
+    console.log(car3.refuel());
+    console.log(airplane1.speed);
+    console.log(airplane2.takeOff());
+    console.log(airplane3.model);
+    console.log(airplane2.fuelType);
+    console.log(airplane1.brand);
+    console.log(airplane1.numberOfEngines);
+    console.log(airplane2.brake());
+    console.log(airplane3.accelerate());
+    console.log(airplane3.refuel());
+    console.log(airplane1.hasLandingGear);
+  </script>
+</html>
