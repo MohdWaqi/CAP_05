@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prototypal Inheritance</title>
+  </head>
+  <body></body>
+  <script>
+    function Common() {
+      this.door = 4;
+      this.accelerate = function () {
+        return "Moving Forward";
+      };
+      this.brake = function () {
+        return "Stop Moving";
+      };
+    }
+    Common.prototype.wheel = 4;
+    let Car = function (modelName, modelColour) {
+      Common.call(this);
+      this.carModel = modelName;
+      this.carColour = modelColour;
+    };
+    Car.prototype = Object.create(Common.prototype);
+    Car.prototype.constructor = Car;
+
+    let car1 = new Car("TATA ALTROZ DARK", "Black");
+    let car2 = new Car("Tata Nexon", "Blue");
+
+    console.log(car2.carModel);
+    console.log(car2.wheel);
+    console.log(car2.accelerate());
+    console.log(car2.door);
+    console.log(car1);
+  </script>
+</html>
