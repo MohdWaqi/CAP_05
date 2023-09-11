@@ -17,23 +17,26 @@
       this.model = vehicleModel;
       this.speed = vehicleSpeed;
       this.fuelType = vehicleFuelType;
-      this.accelerate = () => {
-        return "Yeah speed is increasing";
-      };
-      this.brake = function () {
-        return "♫♬ Dheeme Dheeme ♫♬";
-      };
-      this.refuel = function () {
-        return "I am Hungry, 'Please fill the tank'";
-      };
     };
+
+    Vehicle.prototype.accelerate = () => {
+      return "Yeah speed is increasing";
+    };
+    Vehicle.prototype.brake = function () {
+      return "♫♬ Dheeme Dheeme ♫♬";
+    };
+    Vehicle.prototype.refuel = function () {
+      return "I am Hungry, 'Please fill the tank'";
+    };
+
     function Car(carBrand, carModel, carSpeed, carFuelType) {
       Vehicle.call(this, carBrand, carModel, carSpeed, carFuelType);
-      this.numberOfWheels = 4;
-      this.honk = function () {
-        return "♫♬ Bach ke Zara ♫♬";
-      };
     }
+    Car.prototype.numberOfWheels = 4;
+    Car.prototype.honk = function () {
+      return "♫♬ Bach ke Zara ♫♬";
+    };
+    Object.setPrototypeOf(Car.prototype, Vehicle.prototype);
     function Airplane(
       airplaneBrand,
       airplaneModel,
@@ -48,11 +51,12 @@
         airplaneFuelType,
       ]);
       this.numberOfEngines = airplaneEngine;
-      this.hasLandingGear = true;
-      this.takeOff = function () {
-        return "This Plane is now Landing.";
-      };
     }
+    Airplane.prototype.hasLandingGear = true;
+    Airplane.prototype.takeOff = function () {
+      return "This Plane is now Landing.";
+    };
+    Object.setPrototypeOf(Airplane.prototype, Vehicle.prototype);
 
     let car1 = new Car("Bugatti", "Chiron", "489 Km/h", "Petrol");
     let car2 = new Car(
@@ -89,7 +93,7 @@
       "biofuel",
       1
     );
-    console.log(car1.speed);
+    console.log(car1);
     console.log(car2.honk());
     console.log(car3.model);
     console.log(car2.fuelType);
@@ -108,5 +112,6 @@
     console.log(airplane3.accelerate());
     console.log(airplane3.refuel());
     console.log(airplane1.hasLandingGear);
+    console.log(airplane3);
   </script>
 </html>

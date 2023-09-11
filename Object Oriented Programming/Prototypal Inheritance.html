@@ -7,22 +7,21 @@
   </head>
   <body></body>
   <script>
-    function Common() {
-      this.door = 4;
-      this.accelerate = function () {
+    let common = {
+      door: 4,
+      wheel: 4,
+      accelerate() {
         return "Moving Forward";
-      };
-      this.brake = function () {
+      },
+      brake() {
         return "Stop Moving";
-      };
-    }
-    Common.prototype.wheel = 4;
+      },
+    };
     let Car = function (modelName, modelColour) {
-      Common.call(this);
       this.carModel = modelName;
       this.carColour = modelColour;
     };
-    Car.prototype = Object.create(Common.prototype);
+    Car.prototype = Object.create(common);
     Car.prototype.constructor = Car;
 
     let car1 = new Car("TATA ALTROZ DARK", "Black");
