@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timer</title>
+    <style>
+      * {
+        text-align: center;
+      }
+
+      h3 {
+        font-size: 2.5rem;
+        color: rgb(96, 21, 166);
+        text-shadow: 2px 2px 4px #696565;
+      }
+      h1,
+      h1 > input {
+        font-size: 6rem;
+      }
+      button {
+        margin: 20px;
+        font-size: 1.8rem;
+        border-radius: 5px;
+        border: none;
+        padding: 10px 20px;
+      }
+      h3 + div {
+        width: 60%;
+        margin: auto;
+        padding: 20px;
+        border-radius: 40px;
+        background-color: rgb(178, 78, 203);
+        color: white;
+      }
+      div > button {
+        background-color: rgb(215, 158, 229);
+        color: rgb(73, 6, 95);
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+          rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+          rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+      }
+      div > button:hover {
+        background-color: rgb(160, 108, 208);
+      }
+      h3 > span {
+        color: rgb(121, 115, 128);
+        text-decoration: underline overline;
+        line-height: 4;
+      }
+      p {
+        display: inline;
+      }
+      div {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+          rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+          rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+      }
+      h1 > input {
+        background-color: rgb(126, 45, 146);
+        border: none;
+        color: rgb(55, 19, 64);
+      }
+      input {
+        width: 15%;
+      }
+      input:focus {
+        outline: none;
+      }
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Welcome to <span>Waqi's</span> Timer</h3>
+    <div>
+      <h1>
+        <span onclick="setTimer()"></span>
+        <p></p>
+        <span onclick="setTimer()"></span>
+        <p></p>
+        <span onclick="setTimer()">0</span>s
+      </h1>
+      <button onclick="start()">Start</button>
+      <button onclick="pause()">Pause</button>
+      <button onclick="reset()">Reset</button>
+    </div>
+  </body>
+  <script>
+    let input = document.querySelector("h1");
+
+    let seconds = document.querySelector("h1 > :last-child");
+    let minutes = document.querySelector("h1 > :nth-child(3)");
+    let minutesSign = document.querySelector("h1 > p:nth-child(4)");
+    let hours = document.querySelector("h1 > :first-child");
+    let hoursSign = document.querySelector("h1 > :nth-child(2)");
+    let pauseButton = document.querySelector("div > :nth-child(3)");
+    let inProgress = false;
+    let currentState = "";
+
+    function setTimer() {
+      input.innerHTML =
+        "<input type='number'/><p>h</p> <input type='number'/><p>m</p> <input type='number'/><p>s</p>";
+    }
+    function start() {
+      if (input.querySelector("input")) {
+        let hour = document.querySelector("h1 > input").value;
+        let minute = document.querySelectorAll("h1 > input")[1].value;
+        let second = document.querySelectorAll("h1 > input")[2].value;
+        input.innerHTML =
+          "<span onclick='setTimer()'></span><p></p> <span onclick='setTimer()'></span><p></p> <span onclick='setTimer()'></span>s";
+        seconds = document.querySelector("h1 > :last-child");
+        minutes = document.querySelector("h1 > :nth-child(3)");
+        minutesSign = document.querySelector("h1 > p:nth-child(4)");
+        hours = document.querySelector("h1 > :first-child");
+        hoursSign = document.querySelector("h1 > :nth-child(2)");
+
+        hours.innerText = hour;
+        hour != "" && (hoursSign.innerText = "h");
+        minutes.innerText = minute;
+        minute != "" && (minutesSign.innerText = "m");
+        seconds.innerText = second;
+      }
+
+      if (
+        !inProgress &&
+        (hours.innerText != "" ||
+          minutes.innerText != "" ||
+          seconds.innerText != 0)
+      ) {
+        inProgress = true;
+        currentState = setInterval(function () {
+          let secondValue = seconds.innerText;
+          let minuteValue = minutes.innerText;
+          let hourValue = hours.innerText;
+          if (minuteValue == 0 && hourValue > 0 && secondValue == 0) {
+            minuteValue = 60;
+            hourValue--;
+            hours.innerText = hourValue;
+            hoursSign.innerHTML = "h";
+          }
+          if (secondValue == 0 && minuteValue > 0) {
+            secondValue = 60;
+            minuteValue--;
+            minutes.innerHTML = minuteValue;
+            minutesSign.innerText = "m";
+          }
+          if (secondValue == 0 && minuteValue == 0 && hourValue == 0) {
+            seconds.innerText = 0;
+            minutes.innerText = "";
+            minutesSign.innerHTML = "";
+            hours.innerText = "";
+            hoursSign.innerHTML = "";
+          } else {
+            secondValue--;
+            seconds.innerText = secondValue;
+            if (hourValue == 0) {
+              hours.innerText = "";
+              hoursSign.innerHTML = "";
+            }
+            if (minuteValue == 0 && hourValue == 0) {
+              minutes.innerText = "";
+              minutesSign.innerHTML = "";
+            }
+          }
+          pauseButton.innerText = "Pause";
+        }, 1000);
+      }
+    }
+    function pause() {
+      if (!inProgress && pauseButton.innerText == "Resume") {
+        start();
+      }
+
+      if (inProgress && pauseButton.innerText == "Pause") {
+        clearInterval(currentState);
+        inProgress = false;
+        pauseButton.innerText = "Resume";
+      }
+    }
+    function reset() {
+      clearInterval(currentState);
+      inProgress = false;
+      seconds.innerText = 0;
+      minutes.innerText = "";
+      minutesSign.innerHTML = "";
+      hours.innerText = "";
+      hoursSign.innerHTML = "";
+      pauseButton.innerHTML = "Pause";
+    }
+  </script>
+</html>
