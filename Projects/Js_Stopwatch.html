@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stopwatch</title>
+    <style>
+      * {
+        text-align: center;
+      }
+
+      h3 {
+        font-size: 2.5rem;
+        color: rgb(96, 21, 166);
+        text-shadow: 2px 2px 4px #696565;
+      }
+      h1 {
+        font-size: 6rem;
+      }
+      button {
+        margin: 20px;
+        font-size: 1.8rem;
+        border-radius: 5px;
+        border: none;
+        padding: 10px 20px;
+      }
+      h3 + div {
+        width: 60%;
+        margin: auto;
+        padding: 20px;
+        border-radius: 40px;
+        background-color: rgb(178, 78, 203);
+        color: white;
+      }
+      div > button {
+        background-color: rgb(215, 158, 229);
+        color: rgb(73, 6, 95);
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+          rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+          rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+      }
+      div > button:hover {
+        background-color: rgb(160, 108, 208);
+      }
+      h3 > span {
+        color: rgb(121, 115, 128);
+        text-decoration: underline overline;
+        line-height: 4;
+      }
+      p {
+        display: inline;
+      }
+      div {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+          rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+          rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Welcome to <span>Waqi's</span> Stopwatch</h3>
+    <div>
+      <h1>
+        <span></span>
+        <p></p>
+        <span></span>
+        <p></p>
+        <span>0</span>s
+      </h1>
+      <button onclick="start()">Start</button>
+      <button onclick="pause()">Pause</button>
+      <button onclick="reset()">Reset</button>
+    </div>
+  </body>
+  <script>
+    let seconds = document.querySelector("h1 > :last-child");
+    let minutes = document.querySelector("h1 > :nth-child(3)");
+    let minutesSign = document.querySelector("h1 > p:nth-child(4)");
+    let hours = document.querySelector("h1 > :first-child");
+    let hoursSign = document.querySelector("h1 > :nth-child(2)");
+    let pauseButton = document.querySelector("div > :nth-child(3)");
+    let inProgress = false;
+    let currentState = "";
+    function start() {
+      if (!inProgress) {
+        inProgress = true;
+        currentState = setInterval(function () {
+          let secondValue = seconds.innerText;
+          let minuteValue = minutes.innerText;
+          let hourValue = hours.innerText;
+          if (minuteValue == 60) {
+            minutes.innerText = 0;
+            hourValue++;
+            hours.innerText = hourValue;
+            hoursSign.innerHTML = "h";
+          }
+          if (secondValue == 59) {
+            seconds.innerText = 0;
+            minuteValue++;
+            minutes.innerHTML = minuteValue;
+            minutesSign.innerText = "m";
+          } else {
+            secondValue++;
+            seconds.innerText = secondValue;
+          }
+          pauseButton.innerText = "Pause";
+        }, 1000);
+      }
+    }
+    function pause() {
+      if (!inProgress && pauseButton.innerText == "Resume") {
+        start();
+      }
+
+      if (inProgress && pauseButton.innerText == "Pause") {
+        clearInterval(currentState);
+        inProgress = false;
+        pauseButton.innerText = "Resume";
+      }
+    }
+    function reset() {
+      clearInterval(currentState);
+      inProgress = false;
+      seconds.innerText = 0;
+      minutes.innerText = "";
+      minutesSign.innerHTML = "";
+      hours.innerText = "";
+      hoursSign.innerHTML = "";
+      pauseButton.innerHTML = "Pause";
+    }
+  </script>
+</html>
