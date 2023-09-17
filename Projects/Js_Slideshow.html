@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slide Show</title>
+    <style>
+      * {
+        margin: 0px;
+      }
+      .slide > button {
+        font-size: 8rem;
+        background-color: transparent;
+        border: none;
+        position: absolute;
+        top: 30%;
+        color: rgb(249, 213, 160);
+      }
+      .slide {
+        position: relative;
+      }
+      .slide > img + button {
+        left: 50px;
+        transition: 1s;
+      }
+      .slide > img + button:hover {
+        translate: -20px;
+        color: rgb(221, 153, 70);
+      }
+      .slide > :last-child:hover {
+        translate: 20px;
+        color: rgb(221, 153, 70);
+      }
+      img {
+        width: 100%;
+        height: 80vh;
+        object-fit: cover;
+        margin-bottom: 0px;
+      }
+      .newPosition {
+        object-position: 50% 15%;
+      }
+      .slide > :last-child {
+        right: 50px;
+        transition: 1s;
+      }
+      .slide + div {
+        display: flex;
+        justify-content: center;
+        background-color: rgb(250, 245, 240);
+      }
+      .slide + div > button {
+        font-size: 2rem;
+        margin: 50px;
+        transition: 2s;
+        border-radius: 20px;
+        border: none;
+        padding: 8px 15px;
+        background-color: blanchedalmond;
+        color: rgb(226, 140, 36);
+      }
+      .slide + div > button:hover {
+        transform: translate(0px, -10px);
+        background-color: rgb(216, 156, 66);
+        color: bisque;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide">
+      <img
+        src="https://images.pexels.com/photos/6572635/pexels-photo-6572635.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        alt="image"
+      />
+      <button onclick="left()"><</button>
+      <button onclick="right()">></button>
+    </div>
+    <div>
+      <button onclick="status()">Stop the Show</button>
+    </div>
+  </body>
+  <script>
+    let images = [
+      "https://images.pexels.com/photos/6572635/pexels-photo-6572635.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://w0.peakpx.com/wallpaper/742/563/HD-wallpaper-man-doing-gymnastic.jpg",
+      "https://images.pexels.com/photos/339805/pexels-photo-339805.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/3221165/pexels-photo-3221165.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/3264504/pexels-photo-3264504.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/752615/pexels-photo-752615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/9399193/pexels-photo-9399193.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/13407327/pexels-photo-13407327.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/6009296/pexels-photo-6009296.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://c1.wallpaperflare.com/preview/526/172/845/rock-canyon-antelope-canyon-stone.jpg",
+      "https://images.pexels.com/photos/5244269/pexels-photo-5244269.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/4957199/pexels-photo-4957199.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/2440264/pexels-photo-2440264.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/206329/pexels-photo-206329.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/7600067/pexels-photo-7600067.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/1616196/pexels-photo-1616196.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/1666779/pexels-photo-1666779.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/11855082/pexels-photo-11855082.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    ];
+    let image = document.querySelector("img");
+    let startStop = document.querySelector(".slide+div>button");
+    let imageValue = 0;
+    let auto = true;
+    function left() {
+      auto = false;
+      if (imageValue <= 0) {
+        imageValue = images.length;
+      }
+      imageValue--;
+      if (imageValue == 15 || imageValue == 16) {
+        image.style.objectPosition = "50% 15%";
+      } else {
+        image.style.objectPosition = "";
+      }
+      image.setAttribute("src", images[imageValue]);
+      startStop.innerHTML = "Start the Show";
+    }
+    function right() {
+      auto = false;
+      if (imageValue == images.length - 1) {
+        imageValue = -1;
+      }
+      imageValue++;
+      if (imageValue == 15 || imageValue == 16) {
+        image.style.objectPosition = "50% 15%";
+      } else {
+        image.style.objectPosition = "";
+      }
+
+      image.setAttribute("src", images[imageValue]);
+      startStop.innerHTML = "Start the Show";
+    }
+
+    setInterval(function slideShow() {
+      if (auto) {
+        right();
+        auto = true;
+        startStop.innerHTML = "Stop the Show";
+      }
+    }, 2000);
+
+    function status() {
+      if (auto) {
+        auto = false;
+        startStop.innerHTML = "Start the Show";
+      } else {
+        auto = true;
+        startStop.innerHTML = "Stop the Show";
+        slideShow();
+      }
+    }
+  </script>
+</html>
