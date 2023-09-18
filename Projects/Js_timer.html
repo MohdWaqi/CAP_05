@@ -116,12 +116,26 @@
         minutesSign = document.querySelector("h1 > p:nth-child(4)");
         hours = document.querySelector("h1 > :first-child");
         hoursSign = document.querySelector("h1 > :nth-child(2)");
+        let sec = 0;
+        let min = 0;
+        let newMin= 0;
+        let hr = 0;
+        if(second >= 60){
+          sec = Number(second) %60;
+          min = Math.floor(Number(second)/60);
+        }
+        if(minute >= 60 || min >= 60){
+          min += Number(minute)
+          newMin = min%60
+          hr =Number(hour) + Math.floor(min/60)
+        }
+        
 
-        hours.innerText = hour;
-        hour != "" && (hoursSign.innerText = "h");
-        minutes.innerText = minute;
-        minute != "" && (minutesSign.innerText = "m");
-        seconds.innerText = second;
+        hours.innerText = (minute >= 60 || min >=60)?hr:hour;
+        hour.innerText != "" && (hoursSign.innerText = "h");
+        minutes.innerText = (minute >= 60)?newMin:((second >= 60)?newMin:minute);
+        minutes.innerText != "" && (minutesSign.innerText = "m");
+        seconds.innerText = (second >= 60)?sec:second;
       }
 
       if (
