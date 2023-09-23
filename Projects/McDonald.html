@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual McDonald's</title>
+  </head>
+  <style>
+    body {
+      background-color: rgb(219, 5, 5);
+    }
+    * {
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    #menu > :first-child {
+      width: 10%;
+      height: 60vh;
+    }
+    h1 {
+      font-weight: 800;
+    }
+
+    #menu > :first-child,
+    #menu > :nth-child(2) > div,
+    #payment {
+      background-color: white;
+      border: solid 20px white;
+      border-radius: 30px;
+    }
+    #menu > :nth-child(2) > div {
+      overflow-y: auto;
+    }
+    #menu > :first-child > div {
+      overflow-y: auto;
+      height: 50vh;
+    }
+    #menu > :nth-child(2) > div {
+      height: 50vh;
+      width: 120vh;
+    }
+    #menu > :first-child > div > img {
+      width: 60%;
+      transition: width 1s, height 1s;
+    }
+    #menu > :first-child > div > img:hover {
+      width: 100%;
+    }
+    #menu > :first-child > div::-webkit-scrollbar {
+      display: none;
+    }
+    #menu {
+      display: flex;
+      justify-content: center;
+      gap: 10%;
+    }
+    td > img {
+      width: 60px;
+    }
+    #menu > :nth-child(2) > button,
+    #payment > button {
+      display: inline;
+      width: 45%;
+      border-radius: 30px;
+      height: 50px;
+      margin-top: 20px;
+      color: white;
+      border: none;
+    }
+    .error {
+      color: rgb(252, 4, 4);
+      display: none;
+    }
+    #menu > :nth-child(2) > button,
+    #payment > button {
+      background-color: rgb(153, 22, 90);
+      font-weight: 600;
+      letter-spacing: 1.5px;
+    }
+    #payment > button {
+      background-color: red;
+    }
+
+    #menu > :nth-child(2) > button:hover,
+    #payment > button:hover {
+      background-color: rgb(127, 13, 74);
+      color: rgb(245, 126, 190);
+    }
+    #payment > button:hover {
+      background-color: rgb(190, 14, 14);
+      color: rgb(245, 136, 136);
+    }
+    #menu > :nth-child(2) button:last-child,
+    #payment > button:last-child {
+      background-color: rgb(8, 137, 10);
+      font-weight: 600;
+      letter-spacing: 1.5px;
+    }
+    #menu > :nth-child(2) button:last-child:hover,
+    #payment > button:last-child:hover {
+      background-color: rgb(27, 161, 12);
+      color: rgb(115, 249, 115);
+    }
+    #menu > :nth-child(2) > div > h1 + div {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+    #menu > :nth-child(2) > div > h1 + div > div,
+    #menu > :nth-child(2) > div > h1 + div > div > img {
+      width: 150px;
+    }
+    #menu > :nth-child(2) > div::-webkit-scrollbar {
+      display: none;
+    }
+    #payment {
+      width: 60%;
+      margin: auto;
+      display: none;
+    }
+    table {
+      width: 100%;
+      background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP5rm9_lMbI5FWV6X5l7c4XzHPysDhR1SCwQ&usqp=CAU);
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    input,
+    label {
+      margin: 60px 0px;
+      font-size: 1rem;
+    }
+    input {
+      background-color: yellow;
+      border: none;
+      padding: 10px;
+      border-radius: 20px;
+    }
+    input:focus {
+      outline: none;
+    }
+    th {
+      color: red;
+    }
+  </style>
+  <body>
+    <img
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZU4aLffx8Q2OSDSAJOzRMFJF-ZgmgRgI_pQ&usqp=CAU"
+      alt="logo"
+    />
+    <div id="menu">
+      <div>
+        <h2>Menu</h2>
+        <div>
+          <img
+            src="https://s7d1.scene7.com/is/image/mcdonalds/DC_202012_0116_SpicyCrispyChicken_PotatoBun_832x472:1-4-product-tile-desktop"
+            alt="Chicken Burger"
+          />
+          <img
+            src="https://s7d1.scene7.com/is/image/mcdonalds/DC_201907_0005_BigMac_832x472:1-4-product-tile-desktop"
+            alt="Big Mac"
+          />
+          <img
+            src="https://s7d1.scene7.com/is/image/mcdonalds/DC_202004_0046_EggMcMuffin_832x472:1-4-product-tile-desktop"
+            alt="Egg muffin"
+          />
+          <img
+            src="https://s7d1.scene7.com/is/image/mcdonalds/DC_202002_0004_DoubleCheeseburger_Alt_832x472:1-4-product-tile-desktop"
+            alt="Double Cheese Burger"
+          />
+          <img
+            src="https://s7d1.scene7.com/is/image/mcdonalds/DC_202002_6050_SmallFrenchFries_Standing_832x472:1-4-product-tile-desktop"
+            alt="French Fries"
+          />
+          <img
+            src="https://s7d1.scene7.com/is/image/mcdonalds/DC_201906_1212_MediumIcedCoffee_Glass_A1_832x472:1-4-product-tile-desktop"
+            alt="Iced Coffee"
+          />
+          <img
+            src="https://s7d1.scene7.com/is/image/mcdonalds/DC_201906_7659_MediumIcedMocha_Glass_A1_832x472:1-4-product-tile-desktop"
+            alt="Iced Mocha"
+          />
+          <img
+            src="https://s7d1.scene7.com/is/image/mcdonalds/DC_201907_1598_MediumVanillaShake_Glass_A1_832x472:1-4-product-tile-desktop"
+            alt="Vanilla Shake"
+          />
+          <img
+            src="https://s7d1.scene7.com/is/image/mcdonalds/DC_201907_0345_CaramelSundae_832x472:1-4-product-tile-desktop"
+            alt="Hot Caramel Sundae"
+          />
+          <img
+            src="https://s7d1.scene7.com/is/image/mcdonalds/DC_201906_1697_MediumPremiumHotChocolate_Glass_A1_HL_832x472:1-4-product-tile-desktop"
+            alt="Hot Chocolate"
+          />
+          <img
+            src="https://s7d1.scene7.com/is/image/mcdonalds/Header_MediumFrozenFantaBlueRaspberry_Glass_832x472-1:1-4-product-tile-desktop"
+            alt="Frozen Fanta"
+          />
+          <img
+            src="https://s7d1.scene7.com/is/image/mcdonalds/DC_202006_0483_4McNuggets_Stacked_832x472:1-4-product-tile-desktop"
+            alt="Chicken Nuggets"
+          />
+          <img
+            src="https://s7d1.scene7.com/is/image/mcdonalds/DC_202112_0652_MediumDietCoke_Glass_2_832x472:1-4-product-tile-desktop"
+            alt="Diet Coke"
+          />
+        </div>
+      </div>
+      <div>
+        <div>
+          <h1>My Order</h1>
+          <div></div>
+        </div>
+        <button onclick="cancel()">CANCEL ORDER</button>
+        <button onclick="payment()">DONE</button>
+      </div>
+    </div>
+    <div id="payment">
+      <div>
+        <h3 class="error">! Unable to Proceed</h3>
+        <h1>Payment Gateway</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Name</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <label>Enter Required Amount : </label> <input type="number" />
+      </div>
+      <button onclick="cancel()">CANCEL ORDER</button>
+      <button onclick="proceed()">PROCEED</button>
+    </div>
+  </body>
+  <script>
+    let order = document.querySelector("#menu>:nth-child(2)");
+    let container = document.querySelector(
+      "#menu >:nth-child(2)>:first-child > div"
+    );
+    let error = document.querySelector(".error");
+    let foods = document.querySelectorAll("#menu >:first-child>div >img");
+    let foodPrice = {
+      "Chicken Burger": 112,
+      "Big Mac": 237,
+      "Egg muffin": 240,
+      "Double Cheese Burger": 384.77,
+      "French Fries": 117,
+      "Iced Coffee": 150,
+      "Iced Mocha": 236.19,
+      "Vanilla Shake": 348.21,
+      "Hot Caramel Sundae": 273.42,
+      "Hot Chocolate": 216.19,
+      "Frozen Fanta": 59,
+      "Chicken Nuggets": 415.53,
+      "Diet Coke": 148.76,
+    };
+    let orderWindow = document.getElementById("menu");
+    let paymentWindow = document.getElementById("payment");
+    let userAmount = document.querySelector("input");
+    let userMenu = [];
+    let tableBody = document.querySelector("tbody");
+    let grandTotal = 0;
+    for (let food of foods) {
+      food.addEventListener("click", function () {
+        userMenu.push({
+          name: food.getAttribute("alt"),
+          image: food.getAttribute("src"),
+          price: foodPrice[food.getAttribute("alt")],
+        });
+        let card = document.createElement("div");
+        let photo = document.createElement("img");
+        let foodName = document.createElement("h3");
+
+        photo.setAttribute("src", food.getAttribute("src"));
+        foodName.innerText = food.getAttribute("alt");
+        card.append(photo, foodName);
+        container.append(card);
+        order.style.visibility = "visible";
+      });
+    }
+
+    if (!userMenu.length) {
+      order.style.visibility = "hidden";
+    }
+    function cancel() {
+      orderWindow.style.display = "flex";
+      userMenu = [];
+      order.style.visibility = "hidden";
+      container.innerHTML = "";
+      paymentWindow.style.display = "none";
+      tableBody.innerHTML = "";
+      grandTotal = 0;
+    }
+    function payment() {
+      orderWindow.style.display = "none";
+      paymentWindow.style.display = "block";
+      userMenu.map((element) => {
+        let row = document.createElement("tr");
+        row.innerHTML = `<td><img src=${element.image} alt=${element.name}/></td><td>${element.name}</td><td>₹ ${element.price}</td>`;
+        tableBody.append(row);
+      });
+      let total = userMenu
+        .map((ele) => ele.price)
+        .reduce((acc, curr) => acc + curr, 0);
+      let tax = document.createElement("tr");
+      let showTotal = document.createElement("tr");
+      tax.innerHTML = `<td></td><td>GST  @ 5%</td><td>₹ ${(
+        total * 0.05
+      ).toFixed(2)}</td>`;
+      grandTotal = (total * 1.05).toFixed(2);
+      showTotal.innerHTML = `<td></td>Total Amount<td>₹ ${grandTotal}</td>`;
+      tableBody.append(tax, showTotal);
+    }
+    function proceed() {
+      let amount = Number(userAmount.value);
+      if (amount < grandTotal) {
+        error.style.display = "block";
+      } else {
+        paymentWindow.innerHTML = "";
+        let waiting = document.createElement("h1");
+        waiting.innerText = "Please wait...";
+        paymentWindow.append(waiting);
+        const order = new Promise((resolve, reject) => {
+          const time = Math.floor(Math.random() * 10000);
+          setTimeout(() => {
+            resolve(userMenu);
+          }, time);
+        });
+        order.then(() => {
+          paymentWindow.innerHTML = "";
+          let id = Math.floor(Math.random() * 1000);
+          let orderId = document.createElement("h1");
+          orderId.innerText = `Your order id is ${id} please take your food.`;
+          let table = document.createElement("table");
+          let tbody = document.createElement("tbody");
+          let exchange = document.createElement("h2");
+          table.append(tbody);
+          paymentWindow.append(orderId, table);
+          userMenu.map((ele) => {
+            let newRow = document.createElement("tr");
+            newRow.innerHTML = `<td><img src=${ele.image} alt=${ele.name}/></td><td>${ele.name}</td>`;
+            tbody.append(newRow);
+          });
+
+          if (amount > grandTotal) {
+            exchange.innerText = `And here is your change ₹ ${(
+              amount - grandTotal
+            ).toFixed(2)}`;
+            paymentWindow.append(exchange);
+          }
+        });
+      }
+    }
+  </script>
+</html>
