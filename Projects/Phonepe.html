@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phonepe</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        text-align: center;
+        margin: 0px;
+        font-family: "Nunito", sans-serif;
+      }
+      #home {
+        height: 100vh;
+        background-color: rgba(88, 11, 181, 0.877);
+      }
+      #home > img {
+        margin-top: 5%;
+      }
+      #home > h1,
+      #home > h3,
+      #payment > div > h2 {
+        color: white;
+      }
+      #payment,
+      #result {
+        height: 100vh;
+        display: none;
+      }
+      #result {
+        background-color: rgb(32, 184, 32);
+      }
+      #result > img {
+        margin-top: 5%;
+        width: 150px;
+      }
+      #result > h1 {
+        margin: 0px;
+        color: white;
+      }
+      h1 {
+        margin: 40px;
+      }
+      #payment > :first-child > img {
+        width: 100px;
+        border-radius: 50%;
+        margin-left: 100px;
+      }
+      #payment > :first-child {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        background-color: rgba(88, 11, 181, 0.877);
+      }
+      #payment > :nth-child(4) > :first-child > img {
+        width: 80px;
+      }
+      #payment > :nth-child(4),
+      #payment > :nth-child(4) > div {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+      #payment > :nth-child(4) {
+        width: 60%;
+        margin: auto;
+        justify-content: space-between;
+      }
+      #payment > button,
+      #payment > input {
+        width: 40%;
+        height: 50px;
+        font-size: 2rem;
+        border: none;
+        background-color: rgba(152, 122, 188, 0.877);
+        border-radius: 40px;
+        margin: 5%;
+      }
+      #payment > button {
+        color: white;
+        background-color: rgba(88, 11, 181, 0.877);
+        margin: 10%;
+      }
+      #payment > input:focus {
+        outline: none;
+      }
+      #payment > button:hover {
+        background-color: rgba(121, 40, 220, 0.877);
+      }
+      #payment > input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+      #payment > h3:first-child {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="home">
+      <img
+        src="https://gumlet.assettype.com/bloombergquint%2F2023-02%2F371aa12b-fbe7-44af-b3c5-7110e0ede4fe%2Fphonepe_mainbanner2.jpg?rect=0%2C32%2C1366%2C768&auto=format%2Ccompress&w=576"
+        alt="phonepe"
+      />
+      <h1>PhonePe</h1>
+      <h3>India's Payment App</h3>
+    </div>
+    <div id="payment">
+      <div>
+        <img
+          src="https://images.hola.com/us/images/0261-106645405025-5889380cf83c-1000/square-480/saint-laurent-photocall-paris-fashion-week-womenswear-fall-winter-2020-2021.jpg"
+          alt="Ana"
+        />
+        <h2>Ana De Armas</h2>
+      </div>
+      <input type="number" placeholder="Enter Amount" />
+      <h3>Debit From</h3>
+      <div>
+        <div>
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuoN4G7U9xIqP5XCTiKvzwFgEyot3qhFUviA&usqp=CAU"
+            alt="sbi"
+          />
+          <div>
+            <h4>***********</h4>
+            <h4>State Bank of India</h4>
+          </div>
+        </div>
+        <div>
+          <h4 id="balance">₹<span>18000</span></h4>
+          <input type="radio" />
+        </div>
+      </div>
+
+      <button onclick="processing()">PAY</button>
+    </div>
+    <div id="result"></div>
+  </body>
+  <script>
+    let home = document.getElementById("home");
+    let payment = document.getElementById("payment");
+    let enteredAmount = document.querySelector("#payment > input");
+    let method = document.querySelector("#balance + input");
+    let payMethod = document.querySelector("#payment > h3");
+    let bankBalance = document.querySelector("#balance >span");
+    let output = document.getElementById("result");
+    setTimeout(() => {
+      home.style.display = "none";
+      payment.style.display = "block";
+    }, 3000);
+    function processing() {
+      if (method.checked && enteredAmount.value !== "") {
+        payment.style.display = "none";
+        output.style.display = "block";
+        output.innerHTML = "";
+        output.style.backgroundColor = "rgba(88, 11, 181, 0.877)";
+        output.innerHTML = "<h2>Connecting Securely...</h2>";
+        let waiting = document.querySelector("#result > h2");
+        waiting.style.padding = "300px";
+        waiting.style.color = "white";
+        const proceedPayment = new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (Number(enteredAmount.value) <= Number(bankBalance.innerText)) {
+              resolve(enteredAmount.value);
+            } else {
+              reject(enteredAmount.value);
+            }
+          }, 4000);
+        });
+        proceedPayment
+          .then(() => {
+            output.innerHTML = "";
+            output.style.backgroundColor = "rgb(32, 184, 32)";
+            let image = document.createElement("img");
+            let status = document.createElement("h1");
+            let source = document.createAttribute("src");
+            source.value =
+              "https://lh3.googleusercontent.com/fife/AK0iWDxPsv4wCE8OwaeXVuxjZUevqy_hpcqpBaydzF__m63vLj-fZstDNaId96q7-eb1jWY-tuedM3v8LOeXaJfvVBBX2QlwI31EqVdWJ372iSjupB3TH3zx6GzbZtxmGY94BzCt7R7g19wjsvdwDMhzKRsTwunEZsEXd3SatMID8PiGI74yVoH6a7WUwTdvwCFe-8RxmO8J0wEqo1Ky3JakbfyoyvmZXUyNYHi6HDHcDDuARDxaGtlxE7q7GhqhbbsvSag5ZHlj9SdaQ4ESadiwDt-8z9Twv2B103AOXMI-apViGABRbOdtcdmufx9TO_J6FBIt2R3qiJ_jJUkq5pdILcoW24ub1JKFcMaQPQLGdlLyaEwEBuM1I0cOkq2SEuk3HLjikPyIOoSNszPe8uz6BJqedlsHMcGw03Z6wNrymatI53XNF3N8K7ZL-eNlnAn0Vxyl9UG-poPjJltmJvZvExgrmPkw1Ue4vMpJUYp6497sHL54UTANLfi7rVz7-zKbgfTp_v5ABE0lfh1wvdm4XmGqAOaA4ocdP7C9vf7GH7h3GVC_WU9fEBJzB_J1W3DG-8xT-4gds_6ZgkfkiainbnEcUVHaJG76gQaTOQugIZqhjhnvarZX9CJafmsPqg4Tbz6OyC49CbnAq7uiUxM46BUUN6k3c94aN3382yo5kJjAJahE0p5hQHMhXMutU4SWqNiaGLJ_edbMao5J0zzbU97I0y-oD-NVbIJI50ow5sUuO9_KyAYsJ7LjBA3uXVbB8ImUSOC92WZpY0X0X0YYscUgzPUlhE4n8_0lV9SGhRnQ1VyDnqf71A5_B860abqOUoUGgfmyDyGYbTEqouNaoiQ083j9tJRX4AuprZfA5bY30n8K739VCc02NO_v1p2RRucjqiZFyy1cb-VMn5uOrnpO9e0_hAlIY1tNa2TrVg-P_MpBFuOhsSOcYsxrdBjvBrGNqlgbI0goqPrrVgXOGPZbvJApLg68zhJf8JeheVfRGqtg5UZw3KyWLX8Vo8DEhzvNwv_3jluyHsImQidvQce3fsaEKfEi0Jx2r1XpjIBdbKXMZPM_WPoeDGIDZWB_4FXzwmOmUQDxWp3pyCkePkLvbEDdYVtmhcYbHJvlJdMDPRnnPDA0OEcSXp7_aJZeCUFXm1m0jZ0qg5uTqjRTbeG3rD8xMZQL1g-h9mQ3hx9HANWxo2cbndTsqX96_wDp_rtROWdMZ26Q__aOKXJu7CRCeQQ8RM0eOZg_K21QViU8sckas4lxxIrFemAD9QMizZbBZGElm8tP6ZvreK5CDrze49HfKZ1Rj32tUs9oyLuxcDGQwjuQqnEUTHqdIlXRM0UoavMS-zScHrx_gN3PX_FopHsAwqcL4fWCU3XuCkDxdVwG6-V6M2n51ldaCigrwV3if9miFiXpjVpC_yk0Mbuyo2vbJPiANuJvo-EkD_iSDCkg9rrzghSy94aS0D6MzZKfaHhIS0q1WTLeMzZ4BDz6j7mtZM3q-7rvGWp6IaN0NhtvytEdB8WdedCaNlozvTR3idfa90D_M1PvuFb-Iao=w1547-h883";
+            image.setAttributeNode(source);
+            status.innerText = `Payment of  ₹ ${enteredAmount.value}  to Ana De Armas successful.`;
+            output.append(image, status);
+          })
+          .catch(() => {
+            output.innerHTML = "";
+            let image = document.createElement("img");
+            let status = document.createElement("h1");
+            let source = document.createAttribute("src");
+            source.value =
+              "https://lh3.googleusercontent.com/fife/AK0iWDwTKcyxlY96b4Y93vIODuSplrYzvU4puD8APyjlcVpOLVKcdWhEhSinhIYlONPm9RlKNxQU8PTABTu9KgTEFxOmzvQO7lTBzLJv-fXki1z2ckOTkBngh2LEl3WSZznfS5w1bfHpFjGVPqcVHeOvW68XTy2biN7s-mA2rQDcXdQcd0ta_ecypDIHgvn601P2IHo-VhsILjZ6LB06DB73NopDqhjREENZfAmB5_p2_jZmTYbshqV8sOLIGRYkJSDu6Vb0h0bSH0sUCEdX5iyL3lEWllawJiKShWtyUbr5FR0Nb_pYbPGkZJbAqhYQqsGlUcecQeHTJQA38A_CJnzw4QXb-jX9LSOHtNaIGCUh22g7lskaTotO_uEcRJzsjGTkG-t0q-rfj7U5GlJGNsVwK5fLD1kxtaBL6txJOF7mbGaib_E0r4ZU4amd8DdujCRDFQlKCqedL5KOrDW7jXhHYOZsfWBgcR4SCj8QW2BsQJjqi77jO9cBAN0xhDFub6obkT8Y8hiapX2VFKZJM46GYdSSHtkPApeQ01nj_9SGQXiQfWaZRD3vjtfa1PLe-hCBa2ZUp6SQ5VzzK0rdSvxy_OHBCHUUERFD4dIvoZnrXiL33ppkwqzleUUh_uFSt8EremjeKHYEGmCw7iiKDYDs3POZUSQ3dRpUyurKcPv2tQ6LpoDDZiG4bXNF_AjJGDt1RzjKLlzERoRhDudvhZcwjhZaI3tzUqN5lSrEfUW_lmTjbD2O9svslbiWRCfoZHZQOHyYOziDw8afkveM8gwGEVrrMZBbMbxbKcirLLidERsc1ay0LOMRLNcHIrlq5XgZTJc9NTdAge0ma3dALcjklI9DXck7bI5ut4BsMHC7TMwrPHZsxq4jbT7Bnf8UlfPgwdOzXJNtELb9nP58egh7AEu37cepGSfP2pGtmf2KpQXNfWv1K_mteUmZMLvZ94Qar9H8LeDV7ocgwq8jpp8wchP4ak-c9evasTdy8b-f3gmACCdDeCSjZcM6BI0ckaxYQ7bISsJ-_Jhu3lO_GYF5ys58I9r4BvCVZRJgZ8vZ3yw1H7bfmMELfCi6LSQeNhobbMp_qO4tVZ_BsI-SNUdTB0atECwXZYxaO44K1R6yV_qApxclLa22PK-eNkMd1FrzZC6cZqsEsMwAPL9A0FdNAvv6Xl7kShhM57IDAnauvRb8PbmMCyRhT3ldWwuPeI26eNG7QeMMTzsWQJz1f2LeT9TBRHBslCoLROJN5Wbu99GfijUaMP7Zr1arVBfjgziY7WJwBLc7gwz985_XAU-tq7_OBMMaDxt55w3Q558HCTyGtDDfvDprVrWe81Z-DrWm18x8vyEkASQ2gV7OE6FkrgwUqxe_lbv-YMNFv6_6dErGkz1VVSh-oClfo5jFmS8WUHpa5Wj8F7fwyK2-NxmnR_BKF1I2LrnTQ50B1wfIYJ6nuUgUCBodsstps6Ksy1nJtGld04XLlpvBSf1icW2Va4GhAhxBmMcK0O0S7nQtMO0kRYADepwC3yI2i30ldaiwJuuavuXHsuF56UVxXAxVPaU=w1920-h883";
+            image.setAttributeNode(source);
+            status.innerText = `Payment of  ₹ ${enteredAmount.value}  to Ana De Armas has failed.`;
+            status.style.color = "red";
+            output.append(image, status);
+          });
+      } else {
+        payMethod.innerText = "Please Select Payment Method";
+        payMethod.style.color = "red";
+      }
+    }
+  </script>
+</html>
