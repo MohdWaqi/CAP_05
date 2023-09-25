@@ -1,0 +1,43 @@
+body {
+  background-color: #6499e9;
+}
+#root {
+  width: 60%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding: 50px;
+}
+#root > div > img {
+  border-radius: 0px 80px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+#root > div {
+  text-align: center;
+  border-radius: 0 50%;
+  padding: 20px;
+  background-color: #9eddff;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  color: #3085c3;
+}
+button {
+  font-size: 2rem;
+  width: 325%;
+  padding: 20px;
+  border-radius: 100px 0;
+  border: none;
+  background-color: #1480cd;
+  color: #bedaed;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  transition: 1s;
+}
+button:hover {
+  translate: 20px;
+}
