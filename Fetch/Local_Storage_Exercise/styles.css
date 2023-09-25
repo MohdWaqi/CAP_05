@@ -1,0 +1,58 @@
+* {
+  margin: 0px;
+  font-size: 1.2rem;
+  color: #400760;
+}
+#display {
+  background-color: #5b0888;
+  height: 100vh;
+  padding: 50px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin: auto;
+  gap: 20px;
+  background-color: #9d76c1;
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  color: #663384;
+}
+form > input,
+button {
+  background-color: #5c227b66;
+  border-radius: 20px;
+  color: #400760;
+  border: none;
+  height: 40px;
+  text-align: center;
+}
+button {
+  background-color: #321c3d;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  color: #9c59c0;
+  margin-top: 40px;
+  transition: 1s;
+  padding: 5px 20px;
+}
+button:hover {
+  background-color: #6b2491;
+}
+table {
+  width: 70%;
+  text-align: center;
+  margin: 60px auto;
+  background-color: #9d76c1;
+  border-radius: 20px;
+}
+th {
+  color: rgb(227, 205, 236);
+}
+td,
+th {
+  padding: 10px;
+}
