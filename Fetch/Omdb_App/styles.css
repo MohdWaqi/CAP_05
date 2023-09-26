@@ -1,0 +1,82 @@
+* {
+  margin: 0px;
+}
+body {
+  background-color: black;
+}
+#navBar {
+  background-color: rgba(33, 32, 32, 0.878);
+}
+#navBar > div {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+}
+h2 {
+  background-color: rgb(255, 204, 0);
+  padding: 10px;
+  border-radius: 10px;
+}
+#navBar > div > h3 {
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+h4 {
+  color: white;
+  padding: 20px;
+}
+#navBar + div > div > :nth-child(2) {
+  color: gray;
+}
+#navBar > div > h3:hover {
+  background-color: rgb(42, 42, 42);
+}
+#navBar > div > div > input,
+#navBar > div > div > button {
+  height: 90%;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 10px;
+}
+#navBar > div > div > button {
+  height: 100%;
+  background-color: white;
+  border-radius: 0px 10px 10px 0px;
+  width: 10%;
+}
+#navBar > div > div > button:hover {
+  background-color: rgb(201, 192, 192);
+}
+
+#navBar > div > div {
+  background-color: white;
+  border-radius: 10px;
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+}
+#navBar > div > div > input {
+  width: 70%;
+  padding: 0 30px;
+}
+#navBar > div > div > input:focus {
+  outline: none;
+}
+#navBar + div {
+  width: 70%;
+  margin: 5% auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 40px;
+}
+#navBar + div > div > img {
+  width: 180px;
+}
+#navBar + div > div {
+  width: 180px;
+  background-color: rgb(42, 41, 41);
+  border-radius: 10px;
+}
