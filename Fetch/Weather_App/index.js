@@ -3,8 +3,14 @@ const date = new Date();
 let searchButton = document.querySelector("input + button");
 let userInput = document.querySelector("input");
 let map = document.querySelector("iframe");
-let displayArea = document.querySelector("#display > :first-child");
+let displayArea = document.querySelector(
+  "#display >:first-child >:first-child"
+);
+let currentDay = date.getDay();
+let weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+let display = document.getElementById("forecast");
 
+///------------------ Getting coordinates of latitude and longitude----------------------//
 async function getCoordinates() {
   try {
     let res = await fetch(
@@ -14,15 +20,21 @@ async function getCoordinates() {
     );
     let coordinatesData = await res.json();
     requestData(coordinatesData[0]);
+    forecast(coordinatesData[0]);
   } catch (error) {
     console.log(error);
   }
 }
+// -----------------------------------------------------------------------------------------------------------------------------//
+
+// ------------------------------------------------------Search button functionality----------------------------------------------------///
 searchButton.addEventListener("click", () => {
   map.src = `https://maps.google.com/maps?q=2880%20Broadway,${userInput.value}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
   getCoordinates();
 });
+// -----------------------------------------------------------------------------------------------------------------------------------------//
 
+// --------------------------------------------------- Getting details regarding weather ---------------------------------------------- //
 async function requestData(coordinates) {
   try {
     let res = await fetch(
@@ -34,6 +46,23 @@ async function requestData(coordinates) {
     console.log(error);
   }
 }
+// ------------------------------------------------------------------------------------------------------------------------------- //
+
+// --------------------------------------------------Getting details of forecasted data-------------------------------------------------//
+async function forecast(coordinates) {
+  try {
+    let res = await fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}`
+    );
+    let forecastData = await res.json();
+    displayForecast(forecastData);
+  } catch (error) {
+    console.log(error);
+  }
+}
+// -------------------------------------------------------------------------------------------------------------------------------------------//
+
+// ----------------------------------------------Displaying city's Weather Data using DOM ------------------------------------------------------//
 function displayData(data) {
   displayArea.innerHTML = "";
   let currentDate = document.createElement("h3");
@@ -65,3 +94,29 @@ function displayData(data) {
   )}°C  Visibility:${(data.visibility / 1000).toFixed(1)}Km`;
   displayArea.append(currentDate, place, temperature, currentState, details);
 }
+// ---------------------------------------------------------------------------------------------------------------------------------//
+
+// --------------------------------------------------Displaying forecast data --------------------------------------------------------//
+function displayForecast(data) {
+  display.innerHTML = "";
+  for (let i = 0; i < data.list.length; i += 7) {
+    if (currentDay > 6) {
+      currentDay = 0;
+    }
+    let card = document.createElement("div");
+    let day = document.createElement("h3");
+    let temperatureIcon = document.createElement("img");
+    let temperature = document.createElement("h3");
+    let dewPoint = document.createElement("h4");
+    day.innerText = weekDays[currentDay];
+    temperatureIcon.src = `https://openweathermap.org/img/wn/${data.list[i].weather[0].icon}.png`;
+    temperature.innerText = `${Math.floor(data.list[i].main.temp - 273.15)}°`;
+    dewPoint.innerText = `${Math.floor(
+      data.list[i].main.temp - 273.15 - (100 - data.list[i].main.humidity) / 5
+    )}°`;
+    card.append(day, temperatureIcon, temperature, dewPoint);
+    display.append(card);
+    currentDay++;
+  }
+}
+// ------------------------------------------------------------------------------------------------------------------------------------//

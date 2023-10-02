@@ -1,15 +1,15 @@
 * {
   margin: 0px;
 }
-#display > :first-child {
+#display > :first-child > :first-child {
   font-size: 1.5rem;
   padding: 40px;
   color: rgb(75, 73, 73);
 }
-#display > :first-child > :first-child {
+#display > :first-child :first-child > :first-child {
   color: rgb(249, 128, 0);
 }
-#display > :first-child > div {
+#display > :first-child > :first-child > div {
   margin-top: 20px;
   border-left: 5px solid rgb(249, 128, 0);
   padding: 20px;
@@ -29,7 +29,7 @@
   width: 600px;
 }
 
-#display,
+#display > :first-child,
 #navBar,
 #navBar > :last-child {
   display: flex;
@@ -90,4 +90,21 @@ input:focus {
 }
 #navBar > :first-child > button {
   color: rgb(226, 217, 217);
+}
+#forecast {
+  display: flex;
+  margin-left: 40px;
+  width: max-content;
+  background-color: rgb(51, 50, 50);
+  margin-bottom: 50px;
+  border-radius: 0px 0px 30px 30px;
+  color: white;
+}
+#forecast > div {
+  padding: 30px;
+  text-align: center;
+  border-radius: 0px 0px 30px 30px;
+}
+#forecast > div:hover {
+  background-color: rgb(69, 69, 69);
 }
