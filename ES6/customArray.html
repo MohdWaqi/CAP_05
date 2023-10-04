@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class CustomArray{
+    constructor(...args){
+        for (let i = 0; i < args.length; i++){
+            this[i] = args[i];
+        }
+    }
+    push(...args){
+        for(let arg of args){
+            this[Object.keys(this).length] = arg;
+        }
+    }
+    pop(){
+        delete this[Object.keys(this).length - 1]
+    }
+    top(){
+        return this[Object.keys(this).length - 1]
+    }
+    print(){
+        let output = "["
+        for(let i = 0; i < Object.keys(this).length; i++){
+            output += this[i]
+            if(i != Object.keys(this).length - 1) output +=", "
+        }
+        output += "]";
+        return output;
+    }
+    printReverse(){
+        let output = "["
+        for(let i = Object.keys(this).length-1;i >= 0; i--){
+            output += this[i]
+            if(i != 0) output +=", "
+        }
+        output += "]";
+        return output;
+    }
+    size(){
+        return Object.keys(this).length
+    }
+}
+
+let array = new CustomArray("a", "c", "d", "e", "f", "g", "h");
+array.push(4,6,8)
+array.pop()
+console.log(array.top())
+console.log(array.print())
+console.log(array.printReverse());
+console.log(array.size())
+console.log(array)
+
+</script>
+</html>
