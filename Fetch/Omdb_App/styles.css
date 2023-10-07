@@ -7,6 +7,11 @@ body {
 #navBar {
   background-color: rgba(33, 32, 32, 0.878);
 }
+h1 {
+  text-align: center;
+  color: rgb(177, 175, 175);
+  margin: 10%;
+}
 #navBar > div {
   width: 70%;
   margin: auto;
@@ -28,7 +33,7 @@ h4 {
   color: white;
   padding: 20px;
 }
-#navBar + div > div > :nth-child(2) {
+#navBar + div > div > div > :nth-child(2) {
   color: gray;
 }
 #navBar > div > h3:hover {
@@ -65,17 +70,17 @@ h4 {
 #navBar > div > div > input:focus {
   outline: none;
 }
-#navBar + div {
+#navBar + div > :first-child {
   width: 70%;
   margin: 5% auto;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 40px;
 }
-#navBar + div > div > img {
+#navBar + div > div > div > img {
   width: 180px;
 }
-#navBar + div > div {
+#navBar + div > div > div {
   width: 180px;
   background-color: rgb(42, 41, 41);
   border-radius: 10px;
