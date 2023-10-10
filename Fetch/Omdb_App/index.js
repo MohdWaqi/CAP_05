@@ -3,22 +3,52 @@ let enteredMovie = document.querySelector("input");
 let searchButton = document.querySelector("button");
 let displayArea = document.querySelector("#navBar+ div >div");
 let displayError = document.querySelector("#navBar+ div :last-child");
+
+
+// --------------------------Debouncing to Reduce the unnecessary load on server------------------------------------
+
+function debounce(fetchMovies,delay){
+  let timer;
+  function enable(movieQuery){
+    clearTimeout(timer)
+    timer = setTimeout(() =>{
+      fetchMovies(movieQuery)
+    }, delay)
+  }
+  return enable
+}
+let activate = debounce(request, 700);
+
+// --------------------------------------------------------------------------------------------------------
+
 searchButton.addEventListener("click", () => {
   displayArea.innerHTML = "";
-  let endpoint = `https://www.omdbapi.com/?apikey=${apiKey}&s=${enteredMovie.value}`;
-  async function request() {
-    try {
-      let response = await fetch(endpoint);
-      let fetchedData = await response.json();
-      renderMovies(fetchedData.Search);
-    } catch (error) {
-      displayArea.innerHTML = "";
-      displayError.innerHTML = "";
-      displayError.innerHTML = "<h1>Please Check Your Connection.</h1>";
-    }
-  }
   request();
 });
+enteredMovie.addEventListener("input", () => {
+  displayArea.innerHTML = "";
+  displayError.innerHTML = "<h1>Loading...</h1>"
+  activate(enteredMovie.value);
+})
+
+// --------------------------------------------------------Fetching Movie Data--------------------------------------
+async function request(query) {
+  let endpoint = `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}`;
+  try {
+    let response = await fetch(endpoint);
+    let fetchedData = await response.json();
+    renderMovies(fetchedData.Search);
+  } catch (error) {
+    displayArea.innerHTML = "";
+    displayError.innerHTML = "";
+    displayError.innerHTML = "<h1>500 Internal Error.</h1>";
+  }
+}
+// -------------------------------------------------------------------------------------------------------------------
+
+
+// ----------------------------------------------------Display fetched Movies------------------------------------
+
 function renderMovies(data) {
   if (data) {
     displayError.innerHTML = "";
@@ -32,10 +62,11 @@ function renderMovies(data) {
       movieName.innerText = `${index + 1}. ${element.Title}`;
       movieCard.append(image, release, movieName);
       displayArea.append(movieCard);
-      console.log(data);
     });
   } else {
     displayError.innerHTML = "";
     displayError.innerHTML = "<h1>No Movie Found...</h1>";
   }
 }
+
+// -----------------------------------------------------------------------------------------------------------------------------
