@@ -1,0 +1,125 @@
+* {
+  margin: 0px;
+}
+#navBar > :first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px;
+  font-size: 1.5rem;
+}
+#navBar > :first-child > :first-child {
+  transform: skewY(-15deg);
+}
+#navBar > :first-child > :last-child {
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+}
+button {
+  font-weight: 700;
+  padding: 5px 20px;
+  border: none;
+  background-color: white;
+  font-size: 1rem;
+}
+#navBar > div + div {
+  display: block;
+  padding: 40px;
+  background-color: rgb(235, 226, 226);
+}
+input {
+  font-size: 1.5rem;
+  padding: 10px;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid rgb(174, 165, 165);
+  color: rgb(96, 95, 95);
+}
+
+#navBar > div + div > div > button {
+  background-color: transparent;
+  color: rgb(111, 107, 107);
+}
+input:focus {
+  outline: none;
+}
+button:hover {
+  color: orange;
+}
+#navBar > :first-child > :first-child > h2 {
+  color: orangered;
+}
+#navBar > div + div > :first-child {
+  display: flex;
+  margin: auto;
+  width: 70%;
+}
+#navBar > div + div > div + div {
+  width: 70%;
+  margin: auto;
+}
+#navBar + div {
+  width: 70%;
+  margin: auto;
+  margin-top: 40px;
+}
+#navBar + div > img {
+  width: 100%;
+  height: 60vh;
+  object-fit: cover;
+  border-radius: 30px;
+}
+#navBar + div > div {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+#navBar + div > div > div {
+  text-align: center;
+}
+#navBar + div > div > div > img {
+  border-radius: 50%;
+  width: 60%;
+  margin: 20px;
+}
+h1 {
+  margin: 80px;
+  color: rgb(240, 119, 76);
+}
+img {
+  transition: 3s;
+}
+img:hover {
+  transform: scale(1.2);
+}
+.foods > div > img {
+  width: 50px;
+  margin-left: 10%;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+.foods > div {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+}
+.foods > div:hover {
+  background-color: rgb(220, 197, 189);
+}
+.foods {
+  border-radius: 50px;
+  position: absolute;
+  background-color: rgb(254, 251, 251);
+  left: 15%;
+}
+#navBar + div > h3 {
+  margin: 50px;
+}
+#navBar + div > p {
+  margin: 0px 80px;
+  margin-bottom: 100px;
+  color: rgb(108, 106, 106);
+}
