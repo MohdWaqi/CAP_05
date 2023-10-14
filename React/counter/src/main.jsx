@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import { useState } from 'react'
+
 
 const Counter = ()=>{
   const [count, setCount] = useState(0)
