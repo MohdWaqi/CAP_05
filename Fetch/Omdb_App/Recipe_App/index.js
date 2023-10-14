@@ -29,7 +29,7 @@ async function searchFood(userFood, fromInput = 1) {
 
 // ------------------------------------------displaying suggession after user searched in search bar----------------------------------------
 function displaySuggession(data) {
-  {
+  
     suggesionDisplay.innerHTML = "";
     if (userInput.value != "") {
       for (let food of data) {
@@ -54,7 +54,7 @@ function displaySuggession(data) {
       });
     }
     // ----------------------------------------------------------------------------------------------------------------------------------------------
-  }
+  
 }
 // ----------------------------------------------------------------------------------------------------------------------------------------------
 
