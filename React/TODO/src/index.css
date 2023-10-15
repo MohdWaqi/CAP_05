@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  text-align: center;
+  font-size: 1.2rem;
+}
+#root {
+  background-color: white;
+  min-height: 40vh;
+  width: 40%;
+  margin: 5% auto;
+  padding-bottom: 4%;
+  box-shadow: #3eb3de 0px 5px 15px;
+  border-radius: 30px;
+}
+body {
+  background-color: #d4f0fb;
+}
+#root > nav {
+  background-image: linear-gradient(
+    to right,
+    #b8e4f4,
+    #4ac6f4,
+    #3eb3de,
+    #0481ae
+  );
+  color: white;
+  font-size: 2.5rem;
+  padding: 3%;
+  border-radius: 30px 30px 0px 0px;
+}
+nav + div {
+  width: 50%;
+  background-color: #d4f0fb;
+  margin: 6% auto;
+  padding: 3%;
+  border-radius: 30px 0px;
+  box-shadow: #3eb3de 0px 5px 15px;
+}
+input {
+  padding: 2%;
+  border-radius: 20px 0px;
+  background-color: #e6f7ff;
+  color: #3eb3de;
+  border: none;
+  margin-bottom: 8%;
+  width: 90%;
+}
+input:focus {
+  outline: none;
+}
+nav + div > button {
+  padding: 5%;
+  border-radius: 50%;
+  border: none;
+  background-color: #3eb3de;
+  color: white;
+  box-shadow: #7cd2f1 0px 5px 15px;
+}
+nav + div > button:hover {
+  background-color: #60c4e9;
+}
+.item {
+  text-align: left;
+  justify-content: space-around;
+  transition: transform 0.2s;
+  padding: 5%;
+  background-color: white;
+  position: relative;
+  width: 90%;
+}
+.item:hover {
+  background-color: #d7ecf4;
+}
+
+.zoom {
+  transform: scale(1.2);
+}
+
+label {
+  margin-left: 15%;
+  color: #05698d;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+.options {
+  position: absolute;
+  height: 135%;
+  width: 20%;
+  right: 80px;
+  top: -15px;
+}
+
+.options > button {
+  position: absolute;
+  border: none;
+  border-radius: 50%;
+  padding: 5px 8px;
+  background-color: #e5f2f7;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+.options > button:hover {
+  background-color: #bde4f4;
+}
+.options > :first-child {
+  left: 35%;
+  bottom: 70%;
+}
+.options > :nth-child(3) {
+  left: 5px;
+  bottom: 35%;
+}
+.options > :nth-child(2) {
+  left: 35%;
+  bottom: 0px;
+}
+.options > :last-child {
+  right: 0px;
+  bottom: 35%;
+}
+.item > input {
+  width: 40%;
+  margin: 0px 10%;
+  font-size: 1.2rem;
+}
