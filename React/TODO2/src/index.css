@@ -1,0 +1,32 @@
+*{margin: 0px;
+    font-family: 'Mooli', sans-serif;
+    font-family: 'Nunito', sans-serif;
+    font-family: 'Playpen Sans', cursive;}
+img{
+    width: 100%;
+    height:40vh;
+    object-fit: cover;
+    object-position:0px -500px;
+    filter: sepia(300%) hue-rotate(150deg) saturate(450%);
+}
+.todoDisplay > h1{
+    color:white;
+}
+#root > div{
+    position:relative;
+}
+.todoDisplay{
+    width: 50%;
+    margin:auto;
+    position:absolute;
+    top:20%;
+    left:25%;
+    max-height:65vh
+}
+input+button{
+    background-color:gray;
+    color:white;
+    border-radius:50%;
+    border:none
+}
+
