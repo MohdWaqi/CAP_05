@@ -1,20 +1,20 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import Timer from "./Timer";
 
 function App() {
-  const [showTimer, setShowTimer] = useState(true)
+  const [showTimer, setShowTimer] = useState(true);
 
   return (
     <>
-      {showTimer && <h1>Vite + React</h1>}
+      {showTimer && <Timer />}
       <div className="card">
         <button onClick={() => setShowTimer(!showTimer)}>
-          {showTimer? "Hide Timer": "Show Timer"}
+          {showTimer ? "Hide Timer" : "Show Timer"}
         </button>
-        
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
