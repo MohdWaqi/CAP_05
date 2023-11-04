@@ -2,10 +2,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 function Timer() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(10);
   useEffect(() => {
     setTimeout(() => {
-      setCount((previousValue) => previousValue + 1);
+      setCount((previousValue) => previousValue - 1);
     }, 1000);
   }, [count]);
   return <h1>Watch : {count}</h1>;
